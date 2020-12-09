@@ -1,9 +1,10 @@
 import math
 import numpy as np
-
+from ThermalEnergyStorageSystem import *
+TES = ThermalEnergyStorageSys()
 #Mass Flow Rate of Hot Fluid
 
-Mh = 1500 # (kg/s)
+Mh = TES.massflowrate # (kg/s)
 
 #Mass Flow Rate of Cold Fluid
 
@@ -23,11 +24,11 @@ Twi = 200 # (C)
 
 #Temperature of Solar Salt entering
 
-Tsi = 590 # (C)
+Tsi = TES.hotT - 273 # (C)
 
 #Temperature of Solar Salt Leaving
 
-Tso = 290 # (C)
+Tso = TES.coldT - 273 # (C)
 
 Twsat = 270 # Temperature of saturation (C)
 

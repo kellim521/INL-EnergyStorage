@@ -56,11 +56,11 @@ def Hx1(m_dot_hot, c_p_hot, T_cold_in, m_dot_cold, c_p_cold, T_cold_out, U, A, H
     # print(C_max)
     # print(C_r)
     # print('NTU =', NTU)
-    print('epsilon =', epsilon)
+    print('epsilon =', round(epsilon, 2))
     # print(Q)
     # print(Q_max)
-    #print('T_hot_in1 (k)=', T_hot_in1 )
-    #print('T_hot_out1 (k)=', T_hot_out1)
+    print('T_hot_in1 (k)=', round(T_hot_in1, 2))
+    print('T_hot_out1 (k)=', round(T_hot_out1, 2))
     return T_hot_in1, T_hot_out1
     
 
@@ -85,10 +85,10 @@ def Hx2(m_dot_hot, c_p_hot, T_hot_out2, m_dot_cold, c_p_cold, T_cold_in, U, A, H
     # print(C_max)
     # print(C_r)
     # print('NTU =', NTU)
-    print('epsilon =', epsilon)
+    print('epsilon =', round(epsilon, 2))
     # print(Q)
     # print(Q_max)
-    #print('T_hot_in1 (k)=', T_hot_in2)
+    print('T_hot_in1 (k)=', round(T_hot_in2, 2))
     return T_hot_in2
     
 def Hx3(m_dot_hot, c_p_hot, T_hot_out3, m_dot_cold, c_p_cold, T_hot_in3, U, A, HE_Type):
@@ -113,11 +113,11 @@ def Hx3(m_dot_hot, c_p_hot, T_hot_out3, m_dot_cold, c_p_cold, T_hot_in3, U, A, H
     # print(C_max)
     # print(C_r)
     # print('NTU =', NTU)
-    print('epsilon =', epsilon)
+    print('epsilon =', round(epsilon, 2))
     # print(Q)
     # print(Q_max)
-    #print('T_cold_in (k)=', T_cold_in3)
-    print('Final Steam Out Temp (k)=', T_cold_out3)
+    print('T_cold_in (k)=', round(T_cold_in3, 2))
+    print('Final Steam Out Temp (k)=', round(T_cold_out3, 2))
     return T_cold_out3, T_cold_in3
 
 def effectiveness(NTU, C_r, HE_Type):
@@ -141,7 +141,7 @@ def effectiveness(NTU, C_r, HE_Type):
     return epsilon
 
 
-#Hx1(m_dot_hot, c_p_hot, T_cold_in, m_dot_cold, c_p_cold, T_cold_out, U, A, HE_Type)
+#Hx1(m_dot_hot, c_p_hot, T_cold_in, m_dot_cold, c_p_cold, T_cold_out, U, A, HE_Type):
 X, W = Hx1(Mh, Cph, Twi, Mc, Cpl, Twsat, U, 6, 'Counter Flow')
 
 #Hx2(m_dot_hot, c_p_hot, T_hot_out2, m_dot_cold, c_p_cold, T_cold_in, U, A, HE_Type):
@@ -155,21 +155,49 @@ Z, V = Hx3(Mh, Cph, Y, Mc, Cps, Tsi, U, 3, 'Counter Flow')
 
 #Using Salt Delta T
 
-Q1 = Mh*Cph*((Tsi + 273) - W)
+QS = Mh*Cph*((Tsi + 273) - W)
 
 #Using Water Properties
 
-Q2 = Mc*Cpl*(Twsat-Twi) + Mc*(2760 - 1185) + Mc * Cps * (Z-V)
+QW = Mc*Cpl*(Twsat-Twi) + Mc*(2760 - 1185) + Mc * Cps * (Z-V)
 
-e = Q2/Q1
+e = QW/QS
+
+# Q for each section
+
+Q1 = Mc*Cpl*(Twsat-Twi)
+
+Q2 = Mc*(2760 - 1185)
+
+Q3 = Mc * Cps * (Z-V)
+
+# Percent energy of each section
+
+P1 = 100 * Q1/QW
+
+P2 = 100 * Q2/QW
+
+P3 = 100 * Q3/QW
+
 print('')
 
-print('Salt Energy Balance = ',Q1)
+print('Salt Energy Balance = ', round(QS, 2))
 
 print('')
 
-print('Water/Steam Energy Balance =', Q2)
+print('Water/Steam Energy Balance =', round(QW, 2))
 
+print('')
+
+print('Percent Energy for Part 1 =', round(P1, 2), '%')
+
+print('')
+
+print('Percent Energy for Part 2 =', round(P2, 2), '%')
+
+print('')
+
+print('Percent Energy for Part 3 =', round(P3, 2), '%')
 
 
 

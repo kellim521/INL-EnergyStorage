@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Nov  2 19:15:31 2020
+TES Exergy Model
 
-@author: kelli
 """
 
 import numpy as np
@@ -13,12 +12,11 @@ from thermo.chemical import Chemical
 class tmodel:
     def __init__(self, cod, peit, hotT):
         print('started tmodel')
+        
         h = 0.001  # grid spacing
         k = 0.0001  # time step
         ka = 0.2  # Thermal capacity ratio(Gas/Solid)
-        p = 100
-        q = 108388
-        o = q
+        p = 1000
 
         # Initializing Arrays
         th = np.zeros(p)  # Fluid temperature
@@ -26,7 +24,6 @@ class tmodel:
         ths = np.zeros(p)  # Storage bed temperature
 
         pei = peit  # conjugate heat transfer-stanton number
-        pe = 0.0003  # Peclet number
         pd = np.zeros(p)  # diffusion part
         pdr = np.zeros(p)  # diffusion part-recovery
         thr = np.ones(p)
@@ -34,20 +31,13 @@ class tmodel:
         td = np.zeros(p)
         dth = np.zeros(p)
         thrs = np.ones(p)
-        thss = np.zeros(70000)
-        thrss = np.zeros(70000)
+        thss = np.zeros(90000)
+        thrss = np.zeros(90000)
 
-        """ dp = 0.002
-        L = 5
-        muf = 0.000036
-        x = 0
-        xp = 0
-        xpr = 0 """
-        epsi = 0.35
-        """ fac1 = 25.4 * ((1 - epsi) ** 1.33) / ((1 - (1 - epsi) ** 0.33) * (1 - (1 - epsi) ** 0.66) ** 2)
-        fac2 = (1 - (1 - epsi) ** 0.66) ** 2 """
+        # storage
         c = 0
         while min(th) < 0.999:
+            
             for i in range(p):
                 if i == 0:
                     th[0] = 1  # inlet temperature of hot gas
@@ -64,11 +54,14 @@ class tmodel:
                     td[i] = th[i] * hotT + 298
                     ths[i] = ths[i] + pei * k * (th[i] - ths[i]) * ka
                     thss[c] = ths[i]
-            c = c + 1
-
-        u = 0
+            c+=1
+            print(c)
+            
         print('c = ', c)
+        # recovery
+        u = 0
         while max(thr) > 0.001:
+            
             for i in range(p):
                 if i == 0:
                     thr[0] = 0  # Inlet temperature of cold gas
@@ -84,7 +77,16 @@ class tmodel:
                     tdr[i] = thr[i] * hotT + 298
                     thrs[i] = thrs[i] + pei * k * (thr[i] - thrs[i]) * ka
                     thrss[u] = thr[i]
-            u = u + 1
+            u+=1
+            print(u)
+        self.th = th
+        self.ths = ths
+        
+        self.thr = thr
+        self.tdr = tdr
+        self.td = td
+        self.dth = dth
+        self.thrs = thrs
 
         self.stin = thss
         self.stout = thrss
@@ -92,6 +94,31 @@ class tmodel:
         self.retime = u
         print('u = ', u)
         print('finished tmodel')
+        
+class exergy:    
+    def __init__(self, ratio, TES):
+        """
+        Parameters
+        ----------
+        ratio : ratio of hot fluid temperature entering 
+            heat exchanger over ambient temp
+
+        TES: tmodel object
+
+        """
+        x = 0
+        k = 0.01
+    
+        for i in range(TES.retime):
+            x = x + (TES.stout[i] + (1 / ratio) * math.log((TES.stout[i]) * ratio + 1)) * k  # exergy integration
+    
+        y = x / (1.5 * k)  # fractional exergy recovery
+    
+        exev = y / TES.retime
+    
+        self.exergy_efficiency = exev-0.06
+    
+        
         
 if __name__ == "__main__":
     
@@ -104,7 +131,25 @@ if __name__ == "__main__":
     rho = alumina.rho*.65 + sodiumNitrate.rho*.35
     Cp = alumina.Cp*.65 + sodiumNitrate.Cp*.35
 
-    cod = (k/(rho*Cp))    #*1000
+    cod = (k/(rho*Cp))
+    
+    Th_in = 863
+    Tc_out = 563
+    ratio = Th_in/298
     
     peit = 2000
-    tmodel(cod, peit, hotT)
+    
+    TES = tmodel(cod, peit, hotT)
+    alumin_exergy = exergy(ratio, TES)
+    
+    st_in = TES.stin
+    st_out = TES.stout
+    
+    thr = TES.thr
+    tdr = TES.tdr
+    td = TES.td
+    dth = TES.dth
+    thrs = TES.thrs
+    
+    fluid_temp = TES.th
+    bed_temp = TES.ths

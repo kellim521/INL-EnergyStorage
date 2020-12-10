@@ -7,6 +7,9 @@ To use our code, download the 'system' folder. To run all code for entire system
 ### Required Libraries
 The following libraries are not included with the defualt installation of Python, but are necessary for the code to function<br />
 `IAPWS`<br  />
-Install iapws (steam tables) via iPython Console or command line <$ pip install iapws> Or hit the following link: https://pypi.org/project/iapws/
+https://pypi.org/project/iapws/ <br />
+To install run `pip install iapws` in python console<br  />
 `thermo`<br />
+https://github.com/CalebBell/thermo <br />
+To install run `pip install thermo` in python console<br  />
 

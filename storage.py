@@ -85,12 +85,11 @@ class storage():
         Sat = Nb * Sapb                                                                #Total Surface area
         Saic = Sat * tf                                                                #Surface area in contact with thermocline
         U = 1/(1/13+1/K)                                                               #Overall heat transfer rate
-        Qmax = Saic * U * 10 /1000/1000                                                #Max heat transfer rate of storage
     
         # Material properties
         Rhof = 3943                                                                    #Density of alumina 'kg/m3'
         Cp = 1165                                                                      #Specific heat of alumina 'J/kgK'
-        Vf = .44                                                                       #Void Fraction                                                                       #Cost of Filler '$/tonne'
+        Vf = .44                                                                       #Void Fraction
         Cps = 1520  # specific heat of salt 'J/kg'
         
         Ed = Rhof * Cp                                                                 #Energy density of filler medium 'J/m3K'
@@ -98,9 +97,6 @@ class storage():
         Edsy = (Ed * (1 - Vf)) + (Eds * (Vf))                                          #Combined energy density 'J/m3K'
         
         Edsymwh = Edsy / 3.6e9 * (hotT - coldT)                                        #Combined energy density 'MWh/m3'
-        
-        Tse = Edsymwh * (V - (At * Thh))                                               #Energy stored 'MWh'
-        
         
         Vfill = At * (L - Thl)                                                         #Volume of tank currently full 'm3'
         

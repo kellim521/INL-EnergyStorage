@@ -21,12 +21,12 @@ class ThermalEnergyStorageSys:
         coldT = 563
         
         # import solar and reactor mass flow rate data
-        with open('SolarNew.csv', newline='') as Solar:
+        with open('Solar.csv', newline='') as Solar:
             reader = csv.DictReader(Solar)
             for row in reader:
                 solarData = np.append(solarData, row)
                 
-        with open('ReactorNew.csv', newline='') as Reactor:
+        with open('Reactor.csv', newline='') as Reactor:
             reader = csv.DictReader(Reactor)
             for row in reader:
                 reactorData = np.append(reactorData, row)
@@ -40,7 +40,7 @@ class ThermalEnergyStorageSys:
         # assume thermocline is initially in average position
         thermocline_position = 5
         
-        # loop through 7 days, with 144 10 min intervals per day
+        # loop through 7 days, with 1440 1-min intervals per day
         k=0
         for j in range(7):
             for i in range(1440):
@@ -53,11 +53,15 @@ class ThermalEnergyStorageSys:
                 m_HOT = m_Solar + m_Reactor
                 
                 m_COLD = m_SteamGen
-                print(m_HOT)
+                #print(m_HOT)
                 
                 TankStorage = storage(hotT, coldT, m_HOT, m_COLD, 30, 2.5, 0.026, thermocline_position=thermocline_position)
                 
-                if k % 500 == 0:
+                # show plot at specified times, in minutes
+                # so k % 480 means when k is a multiple of 480 minutes (8 hours)
+                # the plot will display. This number can be adjusted for how
+                # often you wish to see the plot.
+                if k % 480 == 0:
                     fig = plt.figure()
                     ax = fig.add_axes([0,0,1,1])
                     ax.bar(0, TankStorage.thermocline_location, 0.4, color='b')
@@ -80,6 +84,8 @@ class ThermalEnergyStorageSys:
                     ax.set_xticks([])
                     ax.set_yticks([0,1,2,3,4,5,6,7,8,9,10])
                     filename = os.getcwd()+'\\graphs\\tank'+str(k)+'.png'
+                    # Uncomment the following line to save the plots
+                ### MUST be uncommented to create .gif file
                     #plt.savefig(filename, dpi=250, bbox_inches='tight')
                     plt.show()
                 
@@ -88,7 +94,7 @@ class ThermalEnergyStorageSys:
                 area = TankStorage.Area
                 k+=1
         
-        # Create .gif
+        # Uncomment the lines following 6 lines to save the TES animation as a .gif
         # frames = []
         # imgs = sorted(glob.glob('**/*.png', recursive=True), key=os.path.getmtime)
         # for i in imgs:
@@ -97,7 +103,7 @@ class ThermalEnergyStorageSys:
         
         # frames[0].save('tank.gif', format='GIF', append_images=frames[1:],save_all=True, duration=200, loop=0)
         
-        # # Show stored energy graph        
+        # Show stored energy graph        
         fig2 = plt.figure()
         ax = fig2.add_axes([0,0,1,1])
         ax.plot(np.arange(10080), energy)
@@ -108,11 +114,13 @@ class ThermalEnergyStorageSys:
         plt.savefig('exergy-1week.png', dpi=250, bbox_inches='tight')
         plt.show()
 
-        # Energy Stored at 10 min intervals over 1 week:
+        # Energy stored over 1 week:
         self.StoredEnergy = energy
+        
+        # Parameters for steam generator
         self.hotT = hotT
         self.coldT = coldT
         self.massflowrate = m_SteamGen
 
 if __name__ == '__main__':
-    ThermalEnergyStorageSys()
+    TES = ThermalEnergyStorageSys()

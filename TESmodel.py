@@ -16,7 +16,7 @@ class tmodel:
         h = 0.001  # grid spacing
         k = 0.0001  # time step
         ka = 0.2  # Thermal capacity ratio(Gas/Solid)
-        p = 1000
+        p = int(1/h)
 
         # Initializing Arrays
         th = np.zeros(p)  # Fluid temperature
@@ -46,7 +46,7 @@ class tmodel:
                 if 0 < i < (p - 1):
                     td[i] = th[i] * hotT + 298
                     pd[i] = cod * (k / h ** 2) * (th[i + 1] - 2 * th[i] + th[i - 1])
-                    th[i] = th[i] - (k / h) * (th[i] - th[i - 1]) - pei * k * (th[i] - ths[i]) + pd[i]
+                    th[i] = th[i] - (k / h) * (th[i] - th[i - 1]) - pei * k * (th[i] - ths[i]) + pd[i] - (10**-4)*(th[i]-th[0])
                     dth[i] = pei * k * (th[i] - ths[i]) * ka
                     ths[i] = ths[i] + dth[i]
                 if i == (p - 1):
@@ -56,8 +56,7 @@ class tmodel:
                     thss[c] = ths[i]
             c+=1
             print(c)
-            
-        print('c = ', c)
+        
         # recovery
         u = 0
         while max(thr) > 0.001:
@@ -69,7 +68,7 @@ class tmodel:
                     thrs[i] = thrs[i] + pei * k * (thr[i] - thrs[i]) * ka
                 if 0 < i < (p - 1):
                     pdr[i] = cod * (k / h ** 2) * (thr[i + 1] - 2 * thr[i] + thr[i - 1])
-                    thr[i] = thr[i] - (k / h) * (thr[i] - thr[i - 1]) - pei * k * (thr[i] - thrs[i]) + pdr[i]
+                    thr[i] = thr[i] - (k / h) * (thr[i] - thr[i - 1]) - pei * k * (thr[i] - thrs[i]) + pdr[i] - (10**-4)*(th[i]-th[0])
                     tdr[i] = thr[i] * hotT + 298
                     thrs[i] = thrs[i] + pei * k * (thr[i] - thrs[i]) * ka
                 if i == (p - 1):
@@ -92,7 +91,6 @@ class tmodel:
         self.stout = thrss
         self.sttime = c
         self.retime = u
-        print('u = ', u)
         print('finished tmodel')
         
 class exergy:    
@@ -122,7 +120,7 @@ class exergy:
         
 if __name__ == "__main__":
     
-    hotT = 500
+    hotT = 863
 
     alumina = Chemical('PubChem=14769', T = hotT)
     sodiumNitrate = Chemical('sodium nitrate', T = hotT)
@@ -134,13 +132,14 @@ if __name__ == "__main__":
     cod = (k/(rho*Cp))
     
     Th_in = 863
-    Tc_out = 563
     ratio = Th_in/298
     
     peit = 2000
     
     TES = tmodel(cod, peit, hotT)
-    alumin_exergy = exergy(ratio, TES)
+    exergy = exergy(ratio, TES)
+    
+    print('Exergy Efficiency: ', exergy.exergy_efficiency)
     
     st_in = TES.stin
     st_out = TES.stout

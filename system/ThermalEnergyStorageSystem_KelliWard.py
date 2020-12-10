@@ -111,7 +111,7 @@ class ThermalEnergyStorageSys:
         ax.set_ylabel('Energy Stored (MWh)')
         ax.set_title('Energy Stored over 1 week')
         ax.set_xlim(left=0,right=10090)
-        plt.savefig('exergy-1week.png', dpi=250, bbox_inches='tight')
+        plt.savefig('energy-1week.png', dpi=250, bbox_inches='tight')
         plt.show()
 
         # Energy stored over 1 week:

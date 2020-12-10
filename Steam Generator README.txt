@@ -1,7 +1,8 @@
 The Steam Generator code is set up as follows
 
 The first section of code (lines 1-3) import varius needed moduels as well as importing the TES code.
-	If this section of code is being run on its own lines 3 and 4 will need to be commented out
+	Please make sure if this code is being run along with the TES that the files are in the same folder
+	If this section of code is being run on its own lines 3 and 4 will need to be changed as follows
 	Line 3 #from ThermalEnergyStorageSystem_KelliWard import *
 	Line 4 #TES = ThermalEnergyStorageSys()
 

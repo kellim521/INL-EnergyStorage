@@ -3,7 +3,7 @@
 Thermal Energy Storage System
 """
 
-from storage import *
+from storage_KelliWard import *
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick
 import csv

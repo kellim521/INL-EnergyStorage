@@ -1,6 +1,6 @@
 import math
 import numpy as np
-from ThermalEnergyStorageSystem import *
+from ThermalEnergyStorageSystem_KelliWard import *
 TES = ThermalEnergyStorageSys()
 #Mass Flow Rate of Hot Fluid
 

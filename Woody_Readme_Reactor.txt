@@ -2,6 +2,9 @@ Readme- Reactor
 Hello to whoever may be reading this file, please read every section of this file so you understand how the file operates
 where its dependencies are, and how to change the parameters.
 
+-Before doing anything make sure that the lines 115-133 are fixed to grab the solar dataxlsx file from wherever you have saved it. this code
+will not run with out saving it somewhere and pathing it properly in these lines.
+
 -First we have our import and model solvers in the first 10 lines, do not change this
 
 -I have then created open lists for each one of the parameters I want to see in the figures that I output,
@@ -55,5 +58,6 @@ solves for the outlet temperature of the hotside fluid that goes back into the c
 talk to eachother. Changing this will cutoff communication between the codes.
 
 -The last lines are me plotting all of the values called for in the beggining of the file.
+
 
 

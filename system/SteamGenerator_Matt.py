@@ -180,6 +180,34 @@ P2 = 100 * Q2/QW
 
 P3 = 100 * Q3/QW
 
+# line 1 points
+x1 = [10,20,30,40]
+# plotting the line 1 points 
+plt.plot(x1, Hot_Temp, label = "Hot Side", color = 'red')
+# line 2 points
+x2 = [10,20,30,40]
+# plotting the line 2 points 
+plt.plot(x2, Cold_Temp, label = "Cold Side", color = 'b')
+# Set the y axis label of the current axis.
+plt.ylabel('Temperatures (k)')
+# Set a title of the current axes.
+plt.title('Steam Generator Sections')
+plt.xticks([15, 25, 35], ['Section 1', 'Section 2', 'Section3'] )
+plt.axvline([20], linestyle = 'dashed', color = 'gray')
+plt.axvline([30], linestyle = 'dashed', color = 'gray')
+# show a legend on the plot
+plt.legend()
+plt.annotate(str(Twi+273) + 'k', (10, Twi+273), textcoords = 'offset points', xytext = (10, -5))
+plt.annotate(str(Twsat+273) +'k', (20, Twsat+273), textcoords = 'offset points', xytext = (35, -10))
+#plt.annotate(str(Twsat+273) +'k', (30, Twsat+273), textcoords = 'offset points', xytext = (5, -10))
+plt.annotate(str(round(Z)) +'k', (40, Z), textcoords = 'offset points', xytext = (-12, 7))
+plt.annotate(str(round(W)) +'k', (10, W), textcoords = 'offset points', xytext = (10, -7))
+plt.annotate(str(round(X)) +'k', (20, X), textcoords = 'offset points', xytext = (5, -5))
+plt.annotate(str(round(Y)) +'k', (30, Y), textcoords = 'offset points', xytext = (10, -5))
+plt.annotate(str(Tsi + 273) +'k', (40, Tsi + 273), textcoords = 'offset points', xytext = (-12, -13))
+# Display a figure.
+plt.show()
+
 print('')
 
 print('Salt Energy Balance = ', round(QS, 2))

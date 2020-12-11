@@ -13,7 +13,6 @@ import PowerBlock1_Riley as PB1
 import PowerBlock2_Riley as PB2
 import PowerBlock3_Riley as PB3
 import SteamGenerator_Matt as SG
-from thermo.chemical import Chemical
 
 #LOAD VARIATION ---------------------------------------------------------------
 

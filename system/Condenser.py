@@ -108,10 +108,10 @@ def condenser(T_steam_in):
         
     Power = np.pi*(D_hy_tube/2)**2*Ums*deltaPf
         
-    print(ntable)
-    print('Mean Velocity =',Ums,' m/s')
-    print('Change in Pressure =', deltaPf, 'kPa')
-    print('Power =', Power, 'kW')
+    #print(ntable)
+    #print('Mean Velocity =',Ums,' m/s')
+    #print('Change in Pressure =', deltaPf, 'kPa')
+    #print('Power =', Power, 'kW')
         
     T_air_out_check = n_total*(T_steam_in-T_air_in)+T_air_in
     n_check = (T_air_out-T_air_in)/(T_steam_in-T_air_in)*100

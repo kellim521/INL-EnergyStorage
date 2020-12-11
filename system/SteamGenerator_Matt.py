@@ -1,5 +1,6 @@
 import math
 import numpy as np
+import matplotlib.pyplot as plt
 from ThermalEnergyStorageSystem_KelliWard import *
 TES = ThermalEnergyStorageSys()
 #Mass Flow Rate of Hot Fluid
@@ -180,6 +181,9 @@ P2 = 100 * Q2/QW
 
 P3 = 100 * Q3/QW
 
+Hot_Temp = np.array([round(W), round(X), round(Y), Tsi+273])
+Cold_Temp = np.array([Twi+273, Twsat+273, Twsat+273, round(Z)])
+
 # line 1 points
 x1 = [10,20,30,40]
 # plotting the line 1 points 
@@ -207,6 +211,7 @@ plt.annotate(str(round(Y)) +'k', (30, Y), textcoords = 'offset points', xytext =
 plt.annotate(str(Tsi + 273) +'k', (40, Tsi + 273), textcoords = 'offset points', xytext = (-12, -13))
 # Display a figure.
 plt.show()
+
 
 print('')
 

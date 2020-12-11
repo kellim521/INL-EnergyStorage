@@ -107,19 +107,19 @@ def Hx3(m_dot_hot, c_p_hot, T_hot_out3, m_dot_cold, c_p_cold, T_hot_in3, U, A, H
     T_cold_in3 = T_hot_in3 - Q_max / C_min
     T_cold_out3 = T_cold_in3 + Q / C_cold
     
-    print(' ')
-    print('HX3')
+    #print(' ')
+    #print('HX3')
     # print(C_hot)
     # print(C_cold)
     # print(C_min)
     # print(C_max)
     # print(C_r)
     # print('NTU =', NTU)
-    print('epsilon =', round(epsilon, 2))
+    #print('epsilon =', round(epsilon, 2))
     # print(Q)
     # print(Q_max)
-    print('T_cold_in (k)=', round(T_cold_in3, 2))
-    print('Final Steam Out Temp (k)=', round(T_cold_out3, 2))
+    #print('T_cold_in (k)=', round(T_cold_in3, 2))
+    #print('Final Steam Out Temp (k)=', round(T_cold_out3, 2))
     return T_cold_out3, T_cold_in3
 
 def effectiveness(NTU, C_r, HE_Type):
@@ -233,5 +233,8 @@ print('')
 
 print('Percent Energy for Part 3 =', round(P3, 2), '%')
 
+print('')
+
+print('Final Steam Out Temp (k)=', round(T_cold_out3, 2))
 
 

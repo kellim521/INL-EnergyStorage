@@ -11,5 +11,5 @@ https://github.com/CalebBell/thermo <br />
 To install follow instuctions at link or run `pip install thermo` in python console<br  />
 
 ## Installation and Usage
-To use our code, download the 'system' folder. To run all code for entire system, run `FullSystem.py` from that folder. This runs the full system except for the exergy calculations and the reactor model, due to the amount of time they take to run. For running these and each other part of the model individually, see the readme files for each part of the system.
+To use our code, download the 'system' folder. To run all code for entire system, run `FullSystem.py` from that folder. This runs the full system except for the exergy calculations and the reactor model, due to the amount of time they take to run. For running these and each other part of the model individually, see the [individual readme files](https://github.com/kellim521/INL-EnergyStorage/tree/main/Readme-files)
 

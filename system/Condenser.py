@@ -116,6 +116,6 @@ def condenser(T_steam_in):
     T_air_out_check = n_total*(T_steam_in-T_air_in)+T_air_in
     n_check = (T_air_out-T_air_in)/(T_steam_in-T_air_in)*100
         
-    print('Efficiency Check =',n_check,' %')
+    #print('Efficiency Check =',n_check,' %')
     return T_steam_out
     

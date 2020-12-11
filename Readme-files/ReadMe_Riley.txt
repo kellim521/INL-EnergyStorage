@@ -1,4 +1,8 @@
 Riley Willt Python Files
+
+In order to run these files you need to install the IAWPS library for python.
+Install iapws (steam tables) via iPython Console or command line <pip install iapws> Or hit the following link: https://pypi.org/project/iapws/
+
 1. ParameterVariation_Riley.py
 
 This file contains load variation, temperature variation, and other parameter variations.

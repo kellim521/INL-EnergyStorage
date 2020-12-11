@@ -2,9 +2,6 @@ Readme- Reactor
 Hello to whoever may be reading this file, please read every section of this file so you understand how the file operates
 where its dependencies are, and how to change the parameters.
 
--Before doing anything make sure that the lines 115-133 are fixed to grab the solar dataxlsx file from wherever you have saved it. this code
-will not run with out saving it somewhere and pathing it properly in these lines.
-
 -First we have our import and model solvers in the first 10 lines, do not change this
 
 -I have then created open lists for each one of the parameters I want to see in the figures that I output,
@@ -41,7 +38,7 @@ power cold side, the corresponding change in the reactor power will be made by t
 -lines 237-248 then perform the solving of the four ordinary differential equations over a minute period of time and that is chopped into 100 sections.
 
 -Lines 265-274 solve out for the thermo hydraulic processes in the core dependent on the fuel temperature since this a natural circulation system.
-Vavg is a solved orinary differential equation solved for a minute in time and is ran through the loop, from this we are able to derive the mass flow rate through
+Vavg is a solved ordinary differential equation solved for analytically and was implemented in the code whcih is through the loop, from this we are able to derive the mass flow rate through
 the core and heat thransfer coefficient we are necessary to find to initialize the next loop for solving the reactor kinetics differential equation model.
 
 -lines 277-279 set the inlet values of the hot side of the heatexchanger equal to the outlet of the core fluids temp, and the inlet and outlet of the cold side.
@@ -57,6 +54,6 @@ solves for the outlet temperature of the hotside fluid that goes back into the c
 -lines 341 and 342 do not change, these are the saved csv flies of the mass flow rate that are directly fed into the thermal energy storage model which allows the models to
 talk to eachother. Changing this will cutoff communication between the codes.
 
--The last lines are me plotting all of the values called for in the beggining of the file.
+-The last lines plots all of the values called for in the beggining of the file.
 
 

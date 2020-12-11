@@ -119,10 +119,10 @@ def tempoutput(params2):
     and the reactivity table for ranging values of the power which change according to
     the amount of power being produced by the solar power data"""
 #    
-MyData = pd.read_excel("C:/Users/Yugi/Documents/Senior Design 2/Solar_Power_Data.xlsx", sheet_name = "CloudTransient(SolP)") #extracting values of solar power generated in 10 min steps
-#MyData1 = pd.read_excel("C:/Users/Yugi/Documents/Senior Design 2/Solar_Power_Data.xlsx", sheet_name = "Sheet4")#extracting values of reactivity inserted for corresponding solar power 10 min steps
-MyData2 =pd.read_excel("C:/Users/Yugi/Documents/Senior Design 2/Solar_Power_Data.xlsx", sheet_name = "CloudTransient(ReactorM)")# extracting mass flow rate values for each 10 min cycle on the cold side of the heat exchanger
-MyData3 =pd.read_excel("C:/Users/Yugi/Documents/Senior Design 2/Solar_Power_Data.xlsx", sheet_name = "CloudTransient(SolM)")
+MyData = pd.read_excel("Solar_Power_Data.xlsx", sheet_name = "CloudTransient(SolP)") #extracting values of solar power generated in 10 min steps
+#MyData1 = pd.read_excel("Solar_Power_Data.xlsx", sheet_name = "Sheet4")#extracting values of reactivity inserted for corresponding solar power 10 min steps
+MyData2 =pd.read_excel("Solar_Power_Data.xlsx", sheet_name = "CloudTransient(ReactorM)")# extracting mass flow rate values for each 10 min cycle on the cold side of the heat exchanger
+MyData3 =pd.read_excel("Solar_Power_Data.xlsx", sheet_name = "CloudTransient(SolM)")
 #
 df = MyData.values.tolist()
 #df1 = MyData1.values.tolist()

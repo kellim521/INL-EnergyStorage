@@ -235,6 +235,6 @@ print('Percent Energy for Part 3 =', round(P3, 2), '%')
 
 print('')
 
-print('Final Steam Out Temp (k)=', round(T_cold_out3, 2))
+print('Final Steam Out Temp (k)=', round(V, 2))
 
 
